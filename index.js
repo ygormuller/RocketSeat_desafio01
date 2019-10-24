@@ -40,19 +40,44 @@ server.get ('/projects/:id', (req, res)=> {
 
 //Criando projeto
 server.post ('/projects', (req, res)=> {
-  const { project } = req.body;
+  const { id, title, task } = req.body;
+  const project = {id, title, task:[]};
   projects.push(project);
   return res.json(projects);
 })
+
+//Criando tarefa
+server.post('/projects/:id/task', idCheckExists, (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  //const { task } = req.boby;
+
+  const project = projects.find(proj => proj.id == id);
+
+  project.task.push(title);
+
+  return res.json(project);
+});
 
 //Editando titulo do projeto
 server.put('/projects/:id', idCheckExists, (req, res)=>{
   const { id } = req.params;
   const { title } = req.body;
   const checkId = projects.find(proj=>proj.id == id);
-  projects[id].title = title;
+  checkId.title = title;
   return res.json(projects);  
 })
+//Editando tarefa
+server.put('/projects/:id/task', idCheckExists, (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+
+  const project = projects.find(p => p.id == id);
+
+  project.title = title;
+
+  return res.json(project);
+});
 
 //Deletar projeto
 server.delete('/projects/:id', (req, res)=>{
@@ -63,4 +88,3 @@ server.delete('/projects/:id', (req, res)=>{
 });
 
 server.listen(3000);
-
