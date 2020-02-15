@@ -18,9 +18,9 @@ Enviar tanto o ID quanto o título do projeto no formato string com aspas duplas
 específico escolhido através do id presente nos parâmetros da rota;
 
 # Exemplo
-Se chamar a rota POST /projects repassando { id: 1, title: 'Novo projeto' } e a rota POST /projects/1/tasks com
-{ title: 'Nova tarefa' }, o array de projetos fica assim:
+Se eu chamar a rota `POST /projects` repassando `{ id: 1, title: 'Novo projeto' }` e a rota `POST /projects/1/tasks` com `{ title: 'Nova tarefa' }`, meu array de projetos deve ficar assim:
 
+```js
 [
   {
     id: "1",
@@ -28,6 +28,7 @@ Se chamar a rota POST /projects repassando { id: 1, title: 'Novo projeto' } e a 
     tasks: ["Nova tarefa"]
   }
 ];
+```
 
 # Middlewares:
 
